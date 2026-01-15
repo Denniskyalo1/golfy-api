@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\GolfCourse;
 
 class GolfCourseController extends Controller
 {
@@ -11,7 +12,7 @@ class GolfCourseController extends Controller
      */
     public function index()
     {
-        //
+        $courses = GolfCourse::all();
     }
 
     /**
