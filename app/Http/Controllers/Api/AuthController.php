@@ -40,6 +40,7 @@ class AuthController extends Controller
             return response()->json(['message' => 'Invalid credentials.'], 401);
         }
 
+            /** @var \App\Models\MyUserModel $user **/
         $user = Auth::user();
         $token = $user->createToken('api-token')->plainTextToken;
 
@@ -48,5 +49,12 @@ class AuthController extends Controller
             'token' => $token,
             'message' => 'User logged in successfully.'
         ], 200);
+    }
+
+    public function logout(Request $request)
+    {
+        $request->user()->currentAccessToken()->delete();
+
+        return response()->json(['message' => 'User logged out successfully.'], 200);
     }
 }
