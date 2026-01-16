@@ -14,4 +14,5 @@ Route::middleware('auth:sanctum')->group(function () {
 });
 
 Route::apiResource('golf-courses', GolfCourseController::class)->withoutMiddleware('throttle:api');
-Route::apiResource('user-golf-clubs', GolfClubController::class)->middleware('auth');
+Route::apiResource('user-golf-clubs', GolfClubController::class)
+    ->parameters(['user-golf-clubs' => 'golfClub']);
