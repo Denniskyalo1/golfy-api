@@ -52,4 +52,9 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    public function golfClubs()
+    {
+        return $this->hasMany(GolfClub::class);
+    }
 }
