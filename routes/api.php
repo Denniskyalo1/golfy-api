@@ -11,5 +11,6 @@ Route::post('/login', [AuthController::class, 'login']);
 
 Route::middleware('auth:sanctum')->group(function () {
     Route::post('/logout', [AuthController::class, 'logout']);
-    Route::apiResource('golf-courses', GolfCourseController::class)->withoutMiddleware('throttle:api');
 });
+
+Route::apiResource('golf-courses', GolfCourseController::class)->withoutMiddleware('throttle:api');
