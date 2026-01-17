@@ -13,14 +13,17 @@ class GolfCourseController extends Controller
     public function index()
     {
         $courses = GolfCourse::all();
+        return response()->json($courses);
     }
+
 
     /**
      * Show the form for creating a new resource.
      */
     public function create()
     {
-        //
+        $courses = GolfCourse::all();
+        return response()->json($courses);
     }
 
     /**
@@ -36,7 +39,8 @@ class GolfCourseController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $course = GolfCourse::find($id);
+        return response()->json($course);
     }
 
     /**
