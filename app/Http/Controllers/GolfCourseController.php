@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\GolfCourse;
+use App\Http\Resources\GolfCourseResource;
 
 class GolfCourseController extends Controller
 {
@@ -12,7 +13,19 @@ class GolfCourseController extends Controller
      */
     public function index()
     {
-        $courses = GolfCourse::all();
+        $courses = GolfCourse::where('is_active', true)->paginate(5);
+
+        return response()->json([
+        'success' => true,
+        'data' => GolfCourseResource::collection($courses),
+        'meta' => [
+           'current_page' => $courses->currentPage(),
+           'last_page' => $courses->lastPage(),
+           'total' => $courses->total(),
+        ]
+
+    ], 200);
+
     }
 
     /**
