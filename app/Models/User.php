@@ -56,4 +56,18 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    public function userClubs()
+    {
+        return $this->hasMany(UserClub::class);
+    }
+
+    /**
+     * Only enabled clubs (what the golfer actually carries)
+     */
+    public function enabledClubs()
+    {
+        return $this->hasMany(UserClub::class)
+            ->where('is_enabled', true);
+    }
 }

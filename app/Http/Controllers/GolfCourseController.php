@@ -13,6 +13,7 @@ class GolfCourseController extends Controller
      */
     public function index()
     {
+<<<<<<< HEAD
         $courses = GolfCourse::where('is_active', true)->paginate(5);
 
         return response()->json([
@@ -26,14 +27,20 @@ class GolfCourseController extends Controller
 
     ], 200);
 
+=======
+        $courses = GolfCourse::all();
+        return response()->json($courses);
+>>>>>>> 4c2d62428b1a340ac65bab8934c0acbaad4722f2
     }
+
 
     /**
      * Show the form for creating a new resource.
      */
     public function create()
     {
-        //
+        $courses = GolfCourse::all();
+        return response()->json($courses);
     }
 
     /**
@@ -49,7 +56,8 @@ class GolfCourseController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $course = GolfCourse::find($id);
+        return response()->json($course);
     }
 
     /**
