@@ -53,8 +53,17 @@ class User extends Authenticatable
         ];
     }
 
-    public function golfClubs()
+    public function userClubs()
     {
-        return $this->hasMany(GolfClub::class);
+        return $this->hasMany(UserClub::class);
+    }
+
+    /**
+     * Only enabled clubs (what the golfer actually carries)
+     */
+    public function enabledClubs()
+    {
+        return $this->hasMany(UserClub::class)
+            ->where('is_enabled', true);
     }
 }
