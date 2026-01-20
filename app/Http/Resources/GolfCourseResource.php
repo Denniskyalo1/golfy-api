@@ -18,6 +18,7 @@ class GolfCourseResource extends JsonResource
             'id' => $this->id,
             'name' => trim($this->name),
             'type' => $this->course_type,
+            'cover_image' => $this->cover_image,
             'location' => [
                 'city' => $this->city,
                 'country' => $this->country,
