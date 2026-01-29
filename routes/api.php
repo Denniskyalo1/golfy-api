@@ -9,7 +9,8 @@ use App\Http\Controllers\UserClubController;
 
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
-Route::get('/courses', [GolfCourseController::class, 'index']); //Get all courses in db
+Route::get('/courses', [GolfCourseController::class, 'index']);//Get all courses in DB
+Route::get('/courses/{id}', [GolfCourseController::class, 'getCourse']);//Get a single course by ID
 
 //Authenticated routes
 Route::middleware('auth:sanctum')->group(function () {
