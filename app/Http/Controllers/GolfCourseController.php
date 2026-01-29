@@ -27,6 +27,19 @@ class GolfCourseController extends Controller
     ], 200);
     }
 
+    public function getCourse(int $id)
+    {
+        $course = GolfCourse::findorFail($id);
+
+
+        return response()->json([
+            'success' => true,
+            'data' => new GolfCourseResource($course),
+
+        ]);
+
+    }
+
 
     /**
      * Show the form for creating a new resource.
