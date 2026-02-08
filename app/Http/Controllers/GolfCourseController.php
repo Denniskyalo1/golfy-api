@@ -6,10 +6,22 @@ use Illuminate\Http\Request;
 use App\Models\GolfCourse;
 use App\Http\Resources\GolfCourseResource;
 
+/**
+ * @tags Golf Courses
+ */
 class GolfCourseController extends Controller
 {
-    /**
-     * Display a listing of the resource.
+     /**
+     * List Golf Courses
+     *
+     * This endpoint is used for listing active golf courses.
+     *
+     * it returns a paginated list of golf courses.
+     *
+     * For the protected routes, include the following header:
+     * `Authorization: Bearer {token}`
+     *
+     * @unauthenticated
      */
     public function index()
     {
@@ -26,7 +38,19 @@ class GolfCourseController extends Controller
 
     ], 200);
     }
-
+    
+        /**
+        * Get Golf Course Details
+        *
+        * This endpoint is used for retrieving details of a specific golf course by its ID.
+        *
+        * it returns the golf course details, including its holes and their respective pars.
+        *
+        * For the protected routes, include the following header:
+        * `Authorization: Bearer {token}`
+        *
+        * @unauthenticated
+        */
     public function getCourse(int $id)
     {
         $course = GolfCourse::findorFail($id);
@@ -40,10 +64,18 @@ class GolfCourseController extends Controller
 
     }
 
-
-    /**
-     * Show the form for creating a new resource.
-     */
+  /**
+        * Create Golf Course
+        *
+        * This endpoint is used for creating a new golf course.
+        *
+        * it returns the newly created golf course details.
+        *
+        * For the protected routes, include the following header:
+        * `Authorization: Bearer {token}`
+        *
+        * @unauthenticated
+        */
     public function create()
     {
         $courses = GolfCourse::all();

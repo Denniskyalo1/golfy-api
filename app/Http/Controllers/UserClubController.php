@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\UserClub;
 use Illuminate\Http\Request;
 
+/**
+ * @tags User Clubs
+ */
 class UserClubController extends Controller
 {
     /**

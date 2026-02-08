@@ -6,8 +6,21 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 
+/**
+ * @tags User Profile
+ */
 class UserController extends Controller
 {
+        /**
+        * Get User Profile
+        *
+        * This endpoint retrieves the authenticated user's profile information.
+        *
+        * it returns the user's profile details, including name, email, and role.
+        *
+        * For the protected routes, include the following header:
+        * `Authorization: Bearer {token}`
+        */
     public function profile()
     {
         $user = Auth::user();
@@ -25,6 +38,16 @@ class UserController extends Controller
         
     }
 
+        /**
+            * Update User Profile
+            *
+            * This endpoint allows the authenticated user to update their profile information.
+            *
+            * it returns the updated user's profile details, including name, email, and role.
+            *
+            * For the protected routes, include the following header:
+            * `Authorization: Bearer {token}`
+            */
     public function updateProfile(Request $request)
     {
         $user = Auth::user();

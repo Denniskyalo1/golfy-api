@@ -6,9 +6,19 @@ use App\Http\Controllers\Controller;
 use App\Models\ClubCategory;
 use App\Models\UserClub;
 use Illuminate\Http\Request;
-
+/**
+ * @tags Clubs in the bag
+ */
 class ClubBagController extends Controller
 {
+        /**
+        * Get User's Club Bag
+        *
+        * This endpoint retrieves the user's club bag, grouped by club category.
+        *
+        * For the protected routes, include the following header:
+        * `Authorization: Bearer {token}`
+        */
     public function index(Request $request)
     {
         $user = $request->user();
