@@ -12,6 +12,7 @@ class GolfCourse extends Model
         'google_place_id',
         'rating',
         'reviews_count',
+        'likes_count',
         'phone',
         'website',
         'is_open_now',
@@ -27,5 +28,12 @@ class GolfCourse extends Model
         'cover_image',
         'is_active'
     ];
+
+    public function likedByUsers()
+    {
+        return $this->belongsToMany(User::class, 'user_golf_course_likes')->withTimestamps();
+    }
+
 }
+
 

@@ -65,6 +65,11 @@ class User extends Authenticatable
         return $this->hasMany(UserClub::class);
     }
 
+    public function likedCourses()
+   {
+        return $this->belongsToMany( GolfCourse::class, 'user_golf_course_likes',  'user_id', 'golf_course_id');
+   }
+
     /**
      * Only enabled clubs (what the golfer actually carries)
      */

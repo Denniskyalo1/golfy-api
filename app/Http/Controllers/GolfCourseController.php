@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use App\Models\GolfCourse;
 use App\Http\Resources\GolfCourseResource;
 
@@ -122,4 +123,64 @@ class GolfCourseController extends Controller
     {
         //
     }
+
+/**
+        *   Like/Unlike Golf Course
+        *
+        * This endpoint is used for liking or unliking a golf course.
+        *
+        * it returns the updated golf course details.
+        *
+        * For the protected routes, include the following header:
+        * `Authorization: Bearer {token}`
+        *
+        * @authenticated
+        */
+    public function toggleLike(Request $request, int $id)
+    {
+    $user = $request->user(); 
+    $course = GolfCourse::findOrFail($id);
+
+    // Check if the user already liked the course
+    if ($user->likedCourses()->where('golf_course_id', $id)->exists()) {
+        // Unlike: detach from pivot table
+        $user->likedCourses()->detach($id);
+        $course->decrement('likes_count'); // optional if you keep a counter
+        $liked = false;
+    } else {
+        // Like: attach to pivot table
+        $user->likedCourses()->attach($id);
+        $course->increment('likes_count'); // optional if you keep a counter
+        $liked = true;
+    }
+
+    return response()->json([
+        'success' => true,
+        'liked' => $liked,
+        'likes_count' => $course->likes_count,
+    ]);
+}
+
+/**
+            * Get a user's liked courses
+            *
+            * This endpoint allows the authenticated user to view their liked courses.
+            *
+            * it returns a list of the user's liked courses.
+            *
+            * For the protected routes, include the following header:
+            * `Authorization: Bearer {token}`
+            */
+    public function likedCourses(Request $request)
+{
+    $user = Auth::user();
+    /** @var \App\Models\User $user */
+    $likedCourseIds = $user->likedCourses()->pluck('golf_course_id');
+    return response()->json([
+        'liked_course_ids' => $likedCourseIds,
+        'message' => 'User liked courses retrieved successfully.'
+    ], 200);
+}
+
+
 }
